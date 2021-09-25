@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Board } from './board.model';
+import { Board, BoardStatus } from './board.model';
+import { v1 as uuid } from 'uuid';
 
 @Injectable()
 export class BoardsService {
@@ -8,5 +9,17 @@ export class BoardsService {
   getAllBoards(): Board[] {
     // return 값의 타입 지정
     return this.boards;
+  }
+
+  createBoard(title: string, description: string) {
+    const board: Board = {
+      id: uuid(),
+      title, // title:title을 이렇게 생략해줄수 있다.
+      description,
+      status: BoardStatus.PUBLIC, // 기본값을 PUBLIC으로 설정하기
+    };
+
+    this.boards.push(board);
+    return board;
   }
 }
