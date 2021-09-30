@@ -50,10 +50,15 @@ export class BoardsService {
   //   return found;
   // }
 
+  deleteBoard(id: number): Promise<void> {
+    return this.boardRepository.deleteBoard(id);
+  }
+
   // deleteBoard(id: string): void {
   //   const found = this.getBoardById(id);
   //   this.boards = this.boards.filter((board) => board.id !== found.id);
   // }
+
   // updateBoardStatus(id: string, status: BoardStatus): Board {
   //   const board = this.getBoardById(id);
   //   board.status = status;
