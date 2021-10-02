@@ -12,10 +12,20 @@ export class BoardsService {
     @InjectRepository(BoardRepository)
     private boardRepository: BoardRepository,
   ) {}
+
+  async getAllBoards(): Promise<Board[]> {
+    return this.boardRepository.find();
+  }
+
   // getAllBoards(): Board[] {
   //   // return 값의 타입 지정
   //   return this.boards;
   // }
+
+  createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
+    return this.boardRepository.createBoard(createBoardDto);
+  }
+
   // createBoard(createBoardDto: CreateBoardDto) {
   //   const { title, description } = createBoardDto;
   //   //const title = createBoardDto.title; 이것과 동일하다.
@@ -28,9 +38,6 @@ export class BoardsService {
   //   this.boards.push(board);
   //   return board;
   // }
-  createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
-    return this.boardRepository.createBoard(createBoardDto);
-  }
 
   async getBoardById(id: number): Promise<Board> {
     const found = await this.boardRepository.findOne(id);
